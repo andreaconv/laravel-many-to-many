@@ -41,10 +41,13 @@ header{
       min-width: 200px;
     }
 
-    table{
-      span.badge.text-bg-violet{
-        background-color: #6e2cf2;
-      }
+    span.badge.text-bg-violet{
+      background-color: #6e2cf2;
+    }
+
+    .modal-content{
+      background-color: #212529;
+      color: white;
     }
   }
 
