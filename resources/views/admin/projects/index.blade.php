@@ -30,6 +30,7 @@
       @foreach ($projects as $project)
         <tr>
           <th scope="row">{{ $project->id }}</th>
+
           <td>{{ $project->name }}</td>
 
           <td>{{-- il punto interrogativo è il Null-safe operator "?"  --}}
@@ -37,14 +38,19 @@
           </td>
 
           <td>{{ $project->category }}</td>
+
           <td>
-            <span class="badge text-bg-light">Technology</span>
-            <span class="badge text-bg-light">Technology</span>
-            <span class="badge text-bg-light">Technology</span>
-            <span class="badge text-bg-light">Technology</span>
+            @forelse ($project->technologies as $tec)
+              <span class="badge text-bg-light">{{ $tec->name }}</span>
+            @empty
+              <span>- no tec -</span>
+            @endforelse
           </td>
+
+
           @php $date = date_create($project->date_creation) @endphp
           <td>{{ date_format($date, 'd/m/Y') }}</td>
+
           <td >
             <a href="{{ route('admin.project.show', $project) }}" class="btn btn-success" title="Visualizza"><i class="fa-regular fa-eye"></i></a>
             <a href="{{ route('admin.project.edit', $project) }}" class="btn btn-warning" title="Modifica"><i class="fa-solid fa-pencil"></i></a>
