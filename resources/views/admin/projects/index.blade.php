@@ -14,13 +14,14 @@
     </div>
   @endif
 
-  <table class="table table-striped">
+  <table class="table table-striped table-dark">
     <thead>
       <tr>
-        <th scope="col"><a href="{{ route('admin.orderby', ['direction' => $direction]) }}" class="text-black">ID</a></th>
+        <th scope="col"><a href="{{ route('admin.orderby', ['direction' => $direction]) }}" class="text-white">ID</a></th>
         <th scope="col">Nome</th>
         <th scope="col">Tipo</th>
         <th scope="col">Categoria</th>
+        <th scope="col">Tecnologia</th>
         <th scope="col">Data di creazione</th>
         <th id="actions" scope="col">Azioni</th>
       </tr>
@@ -36,11 +37,17 @@
           </td>
 
           <td>{{ $project->category }}</td>
+          <td>
+            <span class="badge text-bg-light">Technology</span>
+            <span class="badge text-bg-light">Technology</span>
+            <span class="badge text-bg-light">Technology</span>
+            <span class="badge text-bg-light">Technology</span>
+          </td>
           @php $date = date_create($project->date_creation) @endphp
           <td>{{ date_format($date, 'd/m/Y') }}</td>
           <td >
-            <a href="{{ route('admin.project.show', $project) }}" class="btn btn-success" title="Visualizza">Vai</a>
-            <a href="{{ route('admin.project.edit', $project) }}" class="btn btn-warning" title="Modifica">Modifica</a>
+            <a href="{{ route('admin.project.show', $project) }}" class="btn btn-success" title="Visualizza"><i class="fa-regular fa-eye"></i></a>
+            <a href="{{ route('admin.project.edit', $project) }}" class="btn btn-warning" title="Modifica"><i class="fa-solid fa-pencil"></i></a>
             @include('admin.partials.form-delete')
           </td>
         </tr>

@@ -6,7 +6,7 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Elimina
+  <i class="fa-solid fa-trash-can"></i>
 </button>
 
 <!-- Modal -->

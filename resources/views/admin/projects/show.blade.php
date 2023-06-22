@@ -10,7 +10,7 @@
       Titolo Progetto
     </h2>
 
-    <a href="{{ route('admin.project.edit', $project) }}" class="btn btn-warning" title="Modifica">Modifica</a>
+    <a href="{{ route('admin.project.edit', $project) }}" class="btn btn-warning" title="Modifica"><i class="fa-solid fa-pencil"></i></a>
     @include('admin.partials.form-delete')
   </div>
 
