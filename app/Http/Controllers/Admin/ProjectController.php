@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Http\Requests\ProjectRequest;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Type;
+use App\Models\Technology;
 
 class ProjectController extends Controller
 {
@@ -37,12 +38,13 @@ class ProjectController extends Controller
   public function create()
   {
     $types = Type::all();
+    $technologies = Technology::all();
     $title = 'Creazione di un nuovo Progetto';
     $method = 'POST';
     $route = route('admin.project.store');
     $project = null;
     // $image = '/img/placeholder.jpg';
-    return view('admin.projects.create-edit', compact('title', 'method', 'route', 'project', 'types'));
+    return view('admin.projects.create-edit', compact('title', 'method', 'route', 'project', 'types', 'technologies'));
   }
 
   /**
@@ -66,9 +68,16 @@ class ProjectController extends Controller
       $form_data['image_path'] = Storage::put('uploads/', $form_data['image']);
     }
 
-    $new_project = new Project();
-    $new_project->fill($form_data);
-    $new_project->save();
+    // $new_project = new Project();
+    // $new_project->fill($form_data);
+    // $new_project->save();
+    // FIXME: soluzione short crea fa il fill e il save
+    $new_project = Project::create($form_data);
+
+    if(array_key_exists('technologies', $form_data)){
+      // attacco al progetto appena creato l'array delle tecnologie proveniente dal form
+      $new_project->technologies()->attach($form_data['technologies']);
+    }
 
     return redirect()->route('admin.project.show', $new_project);
   }
@@ -95,11 +104,12 @@ class ProjectController extends Controller
   public function edit(Project $project)
   {
     $types = Type::all();
+    $technologies = Technology::all();
     $title = 'Modifica del progetto: ' . $project->name;
     $method = 'PUT';
     $route = route('admin.project.update', $project);
     // $image = 'asset(storage/ . $project->image_path)';
-    return view('admin.projects.create-edit', compact('title', 'method', 'route', 'project', 'types'));
+    return view('admin.projects.create-edit', compact('title', 'method', 'route', 'project', 'types', 'technologies'));
   }
 
   /**

@@ -61,7 +61,7 @@
 
             <option
               value="{{ $type->id }}"
-              @if ($type->id == old('type_id', $project?->type->id)) selected @endif >
+              @if ($type->id == old('type_id', $project?->type?->id)) selected @endif >
               {{ $type->name }}
             </option>
 
@@ -84,6 +84,32 @@
           @enderror
       </div>
 
+    </div>
+
+    <div class="row mb-3">
+      <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+        @foreach ($technologies as $tec)
+
+          <input
+            type="checkbox"
+            class="btn-check"
+            id="tec{{ $loop->iteration }}"
+            value="{{ $tec->id }}"
+            name="technologies[]"
+
+            @if (!$errors->any() && $project?->technologies->contains($tec))
+              checked
+            @elseif ($errors->any() && in_array($tec->id, old('technologies', [])))
+              checked
+            @endif
+
+            autocomplete="off">
+          <label class="btn btn-outline-dark" for="tec{{ $loop->iteration }}">{{ $tec->name }}</label>
+
+        @endforeach
+
+      </div>
     </div>
 
     <div class="row">
