@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('project_tecnologie', function (Blueprint $table) {
+        Schema::create('project_technology', function (Blueprint $table) {
 
           // relazione con la tabella projects
           // creo la colonna
@@ -26,11 +26,11 @@ return new class extends Migration
 
           // relazione con la tabella tecnologies
           // creo la colonna
-          $table->unsignedBigInteger('tecnologie_id');
+          $table->unsignedBigInteger('technology_id');
           // creo la FK
-          $table->foreign('tecnologie_id')
+          $table->foreign('technology_id')
                 ->references('id')
-                ->on('tecnologies')
+                ->on('technologies')
                 ->cascadeOnDelete(); //all'eliminazione di una tecnologia viene eliminata anche la relazione con un project
         });
     }
@@ -42,6 +42,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_tecnologie');
+        Schema::dropIfExists('project_technology');
     }
 };

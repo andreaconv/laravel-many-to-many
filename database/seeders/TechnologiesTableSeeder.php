@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Technologie;
+use App\Models\Technology;
 use Illuminate\Support\Str;
 
 class TechnologiesTableSeeder extends Seeder
@@ -26,7 +26,7 @@ class TechnologiesTableSeeder extends Seeder
     ];
 
     foreach($data as $tec){
-      $new_tec = new Technologie();
+      $new_tec = new Technology();
       $new_tec->name = $tec;
       $new_tec->slug = Str::slug($tec, '-');
       $new_tec->save();
