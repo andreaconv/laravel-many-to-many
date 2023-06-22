@@ -28,6 +28,10 @@ class Project extends Model {
     return $this->belongsTo(Type::class);
   }
 
+  public function tecnologies(){
+    return $this->belongsToMany(Technologie::class);
+  }
+
   public static function generateSlug($str){
 
     $slug = Str::slug($str, '-');
